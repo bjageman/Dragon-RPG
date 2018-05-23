@@ -131,7 +131,7 @@ MonoBehaviour:
   walkCursor: {fileID: 2800000, guid: ed412ab7a38604349967ebffe47f0745, type: 3}
   targetCursor: {fileID: 2800000, guid: 4246f21cca60c5c44abcf1996a9167bb, type: 3}
   unknownCursor: {fileID: 2800000, guid: 168a3ef901d16ab41a79c94fe3b5b542, type: 3}
-  cursorHotspot: {x: 96, y: 96}
+  cursorHotspot: {x: 0, y: 0}
 --- !u!114 &114932986779603950
 MonoBehaviour:
   m_ObjectHideFlags: 1

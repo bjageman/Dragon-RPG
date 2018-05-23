@@ -7,17 +7,18 @@ using UnityStandardAssets.CrossPlatformInput;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float walkMoveStopRadius = 0.2f; 
-    
+    [SerializeField] float attackMoveStopRadius = 5f;
+
     ThirdPersonCharacter thirdPersonCharacter;   // A reference to the ThirdPersonCharacter on the object
     CameraRaycaster cameraRaycaster;
-    Vector3 currentClickTarget;
-    bool isInGamepadMode = false; 
+    Vector3 currentDestination, clickpoint;
+    bool isInGamepadMode = false;
 
     private void Start()
     {
         cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
         thirdPersonCharacter = GetComponent<ThirdPersonCharacter>();
-        currentClickTarget = transform.position;
+        currentDestination = transform.position;
     }
 
     // Fixed update is called in sync with physics
@@ -25,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.G)){ // G for gamepad. TODO allow mapping later
             isInGamepadMode = !isInGamepadMode;
-            currentClickTarget = transform.position;
+            currentDestination = transform.position;
         }
         if (isInGamepadMode){
             ProcessGamepadMovement();
@@ -55,27 +56,47 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
+            clickpoint = cameraRaycaster.hit.point;
             switch (cameraRaycaster.currentLayerHit)
             {
                 case Layer.Walkable:
-                    currentClickTarget = cameraRaycaster.hit.point;
+                    currentDestination = ShortDestination(clickpoint, walkMoveStopRadius);
                     break;
                 case Layer.Enemy:
-                    print("not moving to enemy");
+                    currentDestination = ShortDestination(clickpoint, attackMoveStopRadius);
                     break;
                 default:
                     return;
             }
         }
-        var playerToClickPoint = currentClickTarget - transform.position;
-        if (playerToClickPoint.magnitude >= walkMoveStopRadius)
+        WalkToDestination();
+    }
+
+    private void WalkToDestination()
+    {
+        var playerToClickPoint = currentDestination - transform.position;
+        if (playerToClickPoint.magnitude >= 0)
         {
-            thirdPersonCharacter.Move(currentClickTarget - transform.position, false, false);
+            thirdPersonCharacter.Move(currentDestination - transform.position, false, false);
         }
         else
         {
             thirdPersonCharacter.Move(Vector3.zero, false, false);
         }
+    }
+
+    Vector3 ShortDestination(Vector3 destination, float shortening){
+        Vector3 reductionVector = (destination - transform.position).normalized * shortening;
+        return destination - reductionVector;
+    }
+
+    void OnDrawGizmos(){
+        Gizmos.color = Color.black;
+        Gizmos.DrawLine(transform.position, currentDestination);
+        Gizmos.DrawSphere(currentDestination, 0.1f);
+        Gizmos.DrawSphere(clickpoint, 0.2f);
+        Gizmos.color = new Color(255f, 0f, 0, .5f);
+        //Gizmos.DrawWireSphere(transform.position, attackMoveStopRadius);
     }
 }
 
