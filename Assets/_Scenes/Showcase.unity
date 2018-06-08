@@ -247,22 +247,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2b9d7b98b14f2e5479d77086d01a334e, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &891177258 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1587171803472760, guid: 735d0f72fc5b2224b99393f73df5f891,
-    type: 2}
-  m_PrefabInternal: {fileID: 1297847776}
---- !u!114 &891177259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 891177258}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1d5c95e78ea3a5458fceb59dd7f5f06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &936537720
 Prefab:
   m_ObjectHideFlags: 0
@@ -428,20 +412,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 114287739562342188, guid: 735d0f72fc5b2224b99393f73df5f891,
-        type: 2}
-      propertyPath: weaponInUse
-      value: 
-      objectReference: {fileID: 11400000, guid: 608c3f2675f146445b016db407f8e33b,
-        type: 2}
-    - target: {fileID: 114287739562342188, guid: 735d0f72fc5b2224b99393f73df5f891,
-        type: 2}
-      propertyPath: animatorOverrideController
-      value: 
-      objectReference: {fileID: 22100000, guid: 59b2bfb9de4754040a3e980b43ca2686,
-        type: 2}
-    m_RemovedComponents:
-    - {fileID: 114771087242738312, guid: 735d0f72fc5b2224b99393f73df5f891, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 735d0f72fc5b2224b99393f73df5f891, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1641129399

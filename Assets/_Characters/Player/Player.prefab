@@ -140,7 +140,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4904954408169988}
-  - component: {fileID: 114771087242738312}
+  - component: {fileID: 114016164367132262}
   m_Layer: 0
   m_Name: Hand_R
   m_TagString: Untagged
@@ -661,6 +661,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114016164367132262
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1587171803472760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1d5c95e78ea3a5458fceb59dd7f5f06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114203884794542746
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -690,7 +701,8 @@ MonoBehaviour:
   minTimeBetweenHits: 0.5
   maxHitRange: 2
   weaponInUse: {fileID: 11400000, guid: 608c3f2675f146445b016db407f8e33b, type: 2}
-  weaponSocket: {fileID: 1587171803472760}
+  animatorOverrideController: {fileID: 22100000, guid: 59b2bfb9de4754040a3e980b43ca2686,
+    type: 2}
 --- !u!114 &114676663852617036
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -703,17 +715,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
---- !u!114 &114771087242738312
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1587171803472760}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1d5c95e78ea3a5458fceb59dd7f5f06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114845142377523146
 MonoBehaviour:
   m_ObjectHideFlags: 1
