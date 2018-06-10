@@ -22,8 +22,6 @@ namespace RPG.Characters
 
         GameObject walkTarget;
 
-        bool isInGamepadMode = false;
-
         private void Start()
         {
             cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
@@ -33,7 +31,7 @@ namespace RPG.Characters
             walkTarget = new GameObject("Walk Target");
 
             cameraRaycaster = FindObjectOfType<CameraRaycaster>();
-            cameraRaycaster.notifyMouseClickObservers += ProcessMouseClick; //registering
+            cameraRaycaster.notifyLeftClickObservers += ProcessMouseClick; //registering
         }
 
         void ProcessMouseClick(RaycastHit raycastHit, int layerHit){

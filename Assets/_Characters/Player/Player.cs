@@ -18,8 +18,8 @@ namespace RPG.Characters
 		[SerializeField] float minTimeBetweenHits = .5f;
 		[SerializeField] float maxHitRange = 2f;
 
-		[SerializeField] Weapon weaponInUse;
-		[SerializeField] AnimatorOverrideController animatorOverrideController;
+		[SerializeField] Weapon weaponInUse = null;
+		[SerializeField] AnimatorOverrideController animatorOverrideController = null;
 
 		Animator animator;
 		CameraRaycaster cameraRaycaster;
@@ -65,8 +65,8 @@ namespace RPG.Characters
 
 		private void RegisterMouseClick()
 		{
-			cameraRaycaster = FindObjectOfType<CameraRaycaster>();
-			cameraRaycaster.notifyMouseClickObservers += OnMouseClick; //registering
+			cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
+			cameraRaycaster.notifyLeftClickObservers += OnMouseClick; //registering
 		}
 
 		void OnMouseClick(RaycastHit raycastHit, int layerHit)
@@ -87,6 +87,7 @@ namespace RPG.Characters
             if (Time.time - lastHitTime > weaponInUse.GetMinTimeBetweenHits())
             {
                 animator.SetTrigger("Attack"); // TODO make const
+				gameObject.transform.LookAt(enemyComponent.transform);
                 enemyComponent.TakeDamage(damagePerHit);
                 lastHitTime = Time.time;
             }
@@ -103,7 +104,6 @@ namespace RPG.Characters
 			currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
 			if (currentHealthPoints <= 0){
 				//Destroy(gameObject);
-				print("player dead");
 			}
 		}
 	}
