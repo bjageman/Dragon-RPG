@@ -269,6 +269,7 @@ GameObject:
   - component: {fileID: 114676663852617036}
   - component: {fileID: 114203884794542746}
   - component: {fileID: 114287739562342188}
+  - component: {fileID: 114002473792548434}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -606,8 +607,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1862512598832916}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.11, y: 1, z: 4.96}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 27.704132, y: 0, z: 1.8687286}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4344967867787032}
@@ -661,6 +662,21 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114002473792548434
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1862512598832916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c169ac9d3243c424f9a5c8644309dd06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energyBar: {fileID: 0}
+  maxEnergyPoints: 100
+  pointsPerHit: 5
+  currentEnergyPoints: 0
 --- !u!114 &114016164367132262
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -700,7 +716,7 @@ MonoBehaviour:
   damagePerHit: 10
   minTimeBetweenHits: 0.5
   maxHitRange: 2
-  weaponInUse: {fileID: 11400000, guid: 608c3f2675f146445b016db407f8e33b, type: 2}
+  weaponInUse: {fileID: 11400000, guid: c39bd5c5d03c727449eb1d53fb1cce3e, type: 2}
   animatorOverrideController: {fileID: 22100000, guid: 59b2bfb9de4754040a3e980b43ca2686,
     type: 2}
 --- !u!114 &114676663852617036
@@ -764,7 +780,7 @@ SkinnedMeshRenderer:
   - {fileID: 2100000, guid: fc45bd3e9d781c6469cb7e33fd1c8bd0, type: 2}
   - {fileID: 2100000, guid: 99f99fe2b9dc6ea46ad0a5c8bdf70372, type: 2}
   - {fileID: 2100000, guid: e0459f3145339894c93f0fc8a5470fb6, type: 2}
-  - {fileID: 2100000, guid: 9dd08d40217ea3c4aba82359b742f389, type: 2}
+  - {fileID: 2100000, guid: 248c313755b0c314b8f17de2d59dbfc5, type: 2}
   - {fileID: 2100000, guid: aab301082da53694aad1893b1370ec0b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
