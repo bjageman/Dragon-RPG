@@ -2,45 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using RPG.CameraUI;
 
 namespace RPG.Characters{
 
 	public class Energy : MonoBehaviour {
 
-		[SerializeField] RawImage energyBar;
+		[SerializeField] RawImage energyBar = null;
 		[SerializeField] float maxEnergyPoints = 100f;
-		[SerializeField] float pointsPerHit = 5f;
 
 		[SerializeField] float currentEnergyPoints;
-		float lastHitTime = 0f;
-
-		CameraRaycaster cameraRaycaster;
 
 		// Use this for initialization
 		void Start () {
 			currentEnergyPoints = maxEnergyPoints;
-			cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
-			cameraRaycaster.onMouseOverEnemy += OnMouseOverEnemy;
+		}
+
+		// TODO Will this work with simultaneous attacks?
+		public bool IsEnergyAvailable(float amount){
+			return amount < currentEnergyPoints;
+		}
+
+		public void ConsumeEnergy(float energyCost){
+			currentEnergyPoints = currentEnergyPoints - energyCost;
+            currentEnergyPoints = Mathf.Clamp(currentEnergyPoints, 0, maxEnergyPoints);
+			UpdateEnergyBar();
 		}
 		
-		// Update is called once per frame
-		void Update () {	
-			float xValue = -(energyAsPercentage / 2f) - 0.5f;
-            energyBar.uvRect = new Rect(xValue, 0f, 0.5f, 1f);
-		}
 
-		private void OnMouseOverEnemy(Enemy enemy){
-			if (Input.GetMouseButtonDown(1))
-            {
-                SpendEnergyPoints();
-            }
-        }
-
-        private void SpendEnergyPoints()
+        private void UpdateEnergyBar()
         {
-            currentEnergyPoints = currentEnergyPoints - pointsPerHit;
-            currentEnergyPoints = Mathf.Clamp(currentEnergyPoints, 0, maxEnergyPoints);
+            float xValue = -(energyAsPercentage / 2f) - 0.5f;
+            energyBar.uvRect = new Rect(xValue, 0f, 0.5f, 1f);
         }
 
         float energyAsPercentage{ get { return currentEnergyPoints / (float)maxEnergyPoints; } }
