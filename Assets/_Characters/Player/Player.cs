@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.SceneManagement;
 using RPG.Core;
 using RPG.CameraUI; //TODO consider rewiring
 using RPG.Weapons; //TODO consider rewiring
-using System;
 
 namespace RPG.Characters
 {
@@ -13,13 +13,17 @@ namespace RPG.Characters
 
 		[SerializeField] int maxHealthPoints = 100;
 		[SerializeField] float currentHealthPoints;
-		[SerializeField] int damagePerHit = 10;
+		[SerializeField] int baseDamage = 10;
 		[SerializeField] Weapon weaponInUse = null;
 		[SerializeField] AnimatorOverrideController animatorOverrideController = null;
-
 		// Temporarily serialized for dubbing
-		[SerializeField] SpecialAbilityConfig ability1;
+		[SerializeField] SpecialAbility[] abilities;
 
+		[SerializeField] AudioClip[] damageSounds = new AudioClip[0];
+		[SerializeField] AudioClip[] deathSounds = new AudioClip[0];
+		
+		bool isAlive = true;
+		AudioSource audioSource;
 		Animator animator;
 		CameraRaycaster cameraRaycaster;
 		float lastHitTime = 0f;
@@ -32,7 +36,18 @@ namespace RPG.Characters
             RegisterMouseClick();
             PutWeaponInHand();
             SetupRuntimeAnimator();
-			ability1.AddComponent(gameObject);
+			SetupAudio();
+            AddAbilities();
+        }
+
+        private void AddAbilities()
+        {
+            abilities[0].AddComponent(gameObject);
+        }
+
+        private void SetupAudio()
+        {
+            audioSource = gameObject.GetComponent<AudioSource>();
         }
 
         private void SetCurrentMaxHealth()
@@ -71,22 +86,25 @@ namespace RPG.Characters
 
 		void onMouseOverEnemy(Enemy enemy)
         {
-            if (Input.GetMouseButton(0) && IsTargetInRange(enemy))
+            if (Input.GetMouseButton(0) && IsTargetInRange(enemy, weaponInUse.GetMaxAttackRange()))
                 {
                     AttackTarget(enemy);
                 }
 			else if (Input.GetMouseButtonDown(1)){
-				AttemptSpecialAbility();
+				AttemptSpecialAbility(0, enemy);
 			}
         }
 
-		private void AttemptSpecialAbility()
+		private void AttemptSpecialAbility(int abilityIndex, Enemy enemy)
         {
 			Energy energy = GetComponent<Energy>();
-			float energyCost = ability1.EnergyCost;
-			if (energy.IsEnergyAvailable(energyCost)){
+			float energyCost = abilities[abilityIndex].EnergyCost;
+			float attackRange = abilities[abilityIndex].AttackRange;
+
+			if (energy.IsEnergyAvailable(energyCost) && IsTargetInRange(enemy, attackRange)){
 				energy.ConsumeEnergy(energyCost);
-				// TODO Use the ability
+				var abilityParams = new AbilityUseParams(enemy, baseDamage, gameObject, enemy.transform);
+				abilities[abilityIndex].Use(abilityParams);
 			}
 		}
 
@@ -94,25 +112,65 @@ namespace RPG.Characters
         {
             if (Time.time - lastHitTime > weaponInUse.GetMinTimeBetweenHits())
             {
+				print("Attack");
                 animator.SetTrigger("Attack"); // TODO make const
 				gameObject.transform.LookAt(enemy.transform);
-                enemy.TakeDamage(damagePerHit);
+                enemy.TakeDamage(baseDamage);
                 lastHitTime = Time.time;
             }
         }
 
-        private bool IsTargetInRange(Enemy enemy)
+        private bool IsTargetInRange(Enemy enemy, float maxAttackRange)
         {
             float distanceToTarget = (enemy.transform.position - transform.position).magnitude;
-            return distanceToTarget <= weaponInUse.GetMaxAttackRange();
+            return distanceToTarget <= maxAttackRange;
 }
 
 		public void TakeDamage(float damage)
 		{
-			currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
-			if (currentHealthPoints <= 0){
-				//Destroy(gameObject);
+			if (isAlive) {
+				ReduceHealth(damage);
+				if (currentHealthPoints <= 0)
+				{
+					StartCoroutine(KillPlayer());
+				}else{
+					PlayDamageSound();
+				}
 			}
-		}
-	}
+			
+        }
+
+        private IEnumerator KillPlayer()
+        {
+            isAlive = false;
+			float soundLength = PlayDeathSound();
+            Debug.Log("Death Animation");
+            //TODO Replace with 'Game Over' menu and reload option
+            yield return new WaitForSeconds(soundLength);
+            int sceneBuildIndex = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(sceneBuildIndex);
+        }
+
+		private void PlayDamageSound()
+        {
+			var rnd = Random.Range(0, damageSounds.Length - 1);
+            AudioClip damageSound = damageSounds[rnd];
+			audioSource.clip = damageSound;
+			audioSource.Play();
+        }
+
+        private float PlayDeathSound()
+        {
+			var rnd = Random.Range(0, deathSounds.Length - 1);
+            AudioClip deathSound = deathSounds[rnd];
+			audioSource.clip = deathSound;
+			audioSource.Play();
+			return audioSource.clip.length;
+        }
+
+        private void ReduceHealth(float damage)
+        {
+			currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
+        }
+    }
 }

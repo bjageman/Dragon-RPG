@@ -7,15 +7,13 @@ namespace RPG.Characters{
 
 		PowerAttackConfig config;
 
-		public void SetConfig(PowerAttackConfig config){
-			this.config = config;
-		}
+		public PowerAttackConfig Config{ set { this.config = value;}}
 
-		void Start(){
-		}
-
-		public void Use(){
-
+		public void Use(AbilityUseParams parameters){
+			float damage = config.ExtraDamage + parameters.baseDamage;
+			print(parameters.parent.name + " power attacked with " + damage);
+			parameters.target.TakeDamage(damage);
+			parameters.parent.GetComponent<Animator>().SetTrigger("Attack");
 		}
 	}
 }

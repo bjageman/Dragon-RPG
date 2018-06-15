@@ -4,19 +4,18 @@ using UnityEngine;
 
 namespace RPG.Characters {
 [CreateAssetMenu(menuName = ("RPG/Special Ability/Power Attack"))]
-public class PowerAttackConfig : SpecialAbilityConfig {
+public class PowerAttackConfig : SpecialAbility {
 
 	[Header("Power Attack Specific")]
-	[SerializeField] float attackDamage = 10f;
+	[SerializeField] float extraDamage = 10f;
 
-	public float AttackDamage{
-		get { return this.attackDamage; }
+	public float ExtraDamage{ get { return this.extraDamage; } }
+
+	public override void AddComponent(GameObject gameObjectToAttachTo){
+		var behaviorComponent = gameObjectToAttachTo.AddComponent<PowerAttackBehavior>();
+		behaviorComponent.Config = this;
+		behavior = behaviorComponent;
 	}
 
-	public override ISpecialAbility AddComponent(GameObject gameObjectToAttachTo){
-		var behaviourComponent = gameObjectToAttachTo.AddComponent<PowerAttackBehavior>();
-		behaviourComponent.SetConfig(this);
-		return behaviourComponent;
-	}
 }
 }

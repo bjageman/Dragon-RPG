@@ -13,8 +13,9 @@ public class CameraRaycaster : MonoBehaviour
 	[SerializeField] Vector2 cursorHotspot = new Vector2 (0, 0); //
 
 	const int WALKABLE_LAYER = 8;
-
     float maxRaycastDepth = 100f; // Hard coded value
+
+	Rect screenRect = new Rect(0,0, Screen.width, Screen.height);
 	
 	public delegate void OnMouseOverWalkable(Vector3 destination);
     public event OnMouseOverWalkable onMouseOverWalkable;
@@ -25,6 +26,7 @@ public class CameraRaycaster : MonoBehaviour
 
     void Update()
         {
+			screenRect = new Rect(0,0, Screen.width, Screen.height);
             // Check if pointer is over an interactable UI element
             if (EventSystem.current.IsPointerOverGameObject())
             {
@@ -37,10 +39,12 @@ public class CameraRaycaster : MonoBehaviour
         }
 
 		void PerformRaycasts(){
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			// Specify layer priorities
-			if (RaycastForEnemy(ray)) { return; } 
-			if (RaycastForWalkable(ray)){ return; }
+			if (screenRect.Contains(Input.mousePosition)){
+				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+				// Specify layer priorities
+				if (RaycastForEnemy(ray)) { return; } 
+				if (RaycastForWalkable(ray)){ return; }
+			}
 		}
 
         private bool RaycastForEnemy(Ray ray)

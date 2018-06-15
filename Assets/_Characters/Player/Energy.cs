@@ -9,17 +9,34 @@ namespace RPG.Characters{
 
 		[SerializeField] RawImage energyBar = null;
 		[SerializeField] float maxEnergyPoints = 100f;
-
+		[SerializeField] float regenPoints = 1f;
+		[SerializeField] float timeBetweenRegen = 1f;
 		[SerializeField] float currentEnergyPoints;
 
 		// Use this for initialization
 		void Start () {
 			currentEnergyPoints = maxEnergyPoints;
+			StartCoroutine(RegenerateEnergy());
 		}
 
-		// TODO Will this work with simultaneous attacks?
-		public bool IsEnergyAvailable(float amount){
-			return amount < currentEnergyPoints;
+        private IEnumerator RegenerateEnergy()
+        {
+			while(true){
+				yield return new WaitForSeconds(timeBetweenRegen);
+				AddEnergy(regenPoints);
+			}
+        }
+
+        // TODO Will this work with simultaneous attacks?
+        public bool IsEnergyAvailable(float amount){
+			return amount <= currentEnergyPoints;
+		}
+
+		// TODO Combine these two functions
+		public void AddEnergy(float energyPoints){
+			currentEnergyPoints = currentEnergyPoints + energyPoints;
+            currentEnergyPoints = Mathf.Clamp(currentEnergyPoints, 0, maxEnergyPoints);
+			UpdateEnergyBar();
 		}
 
 		public void ConsumeEnergy(float energyCost){

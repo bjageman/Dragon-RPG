@@ -20,11 +20,11 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.3455882, g: 0.2699514, b: 0.13467777, a: 1}
+  m_AmbientSkyColor: {r: 0.1, g: 0.1, b: 0.1, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 4
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: e7471c7bc3e48f8408ba34ff15fec1e5, type: 2}
   m_HaloStrength: 0.5
@@ -112,7 +112,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: caabe6284e12009419cb3f99c35a1ce8, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 9201ec46da29d5d49afe95e0e3758f30, type: 2}
 --- !u!4 &17041247 stripped
 Transform:
   m_PrefabParentObject: {fileID: 408730, guid: 344ca0d6c729a6e478b3f85b9f91305b, type: 2}
@@ -121,6 +121,27 @@ Transform:
 Transform:
   m_PrefabParentObject: {fileID: 408730, guid: 344ca0d6c729a6e478b3f85b9f91305b, type: 2}
   m_PrefabInternal: {fileID: 1646549668}
+--- !u!1 &166136424 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1028107636920678, guid: 2b4f5ffdbcabcb84fa8c5eb931d4c384,
+    type: 2}
+  m_PrefabInternal: {fileID: 1345927900}
+--- !u!114 &166136432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 166136424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c542c7db4ea743b4cacca72f72336f21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: c5e2a73ad4706440f93bf05df0b465fe, type: 3}
+  layerFilter: 0
+  triggerRadius: 5
+  isOneTimeOnly: 1
+  hasPlayed: 0
 --- !u!1 &177533213
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,6 +712,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 344ca0d6c729a6e478b3f85b9f91305b, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &849522520 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114002473792548434, guid: 735d0f72fc5b2224b99393f73df5f891,
+    type: 2}
+  m_PrefabInternal: {fileID: 1865570460}
+  m_Script: {fileID: 11500000, guid: c169ac9d3243c424f9a5c8644309dd06, type: 3}
 --- !u!1 &878698514
 GameObject:
   m_ObjectHideFlags: 0
@@ -1216,7 +1243,13 @@ Prefab:
       propertyPath: walkCursor
       value: 
       objectReference: {fileID: 2800000, guid: ed412ab7a38604349967ebffe47f0745, type: 3}
-    m_RemovedComponents: []
+    - target: {fileID: 114723196288914586, guid: c879012f5ef29594999a25325d22d5d2,
+        type: 2}
+      propertyPath: enemyCursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 4246f21cca60c5c44abcf1996a9167bb, type: 3}
+    m_RemovedComponents:
+    - {fileID: 114794277203729852, guid: c879012f5ef29594999a25325d22d5d2, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: c879012f5ef29594999a25325d22d5d2, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1865570460
@@ -1226,6 +1259,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114287739562342188, guid: 735d0f72fc5b2224b99393f73df5f891,
+        type: 2}
+      propertyPath: abilities.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4947114628300156, guid: 735d0f72fc5b2224b99393f73df5f891, type: 2}
       propertyPath: m_LocalPosition.x
       value: 27.704132
@@ -1263,6 +1301,28 @@ Prefab:
       propertyPath: energyBar
       value: 
       objectReference: {fileID: 1052670103}
+    - target: {fileID: 114287739562342188, guid: 735d0f72fc5b2224b99393f73df5f891,
+        type: 2}
+      propertyPath: ability1
+      value: 
+      objectReference: {fileID: 11400000, guid: e5dc4ec67b60bd447bec4601083d0017,
+        type: 2}
+    - target: {fileID: 114287739562342188, guid: 735d0f72fc5b2224b99393f73df5f891,
+        type: 2}
+      propertyPath: energy
+      value: 
+      objectReference: {fileID: 849522520}
+    - target: {fileID: 114287739562342188, guid: 735d0f72fc5b2224b99393f73df5f891,
+        type: 2}
+      propertyPath: abilities.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: e5dc4ec67b60bd447bec4601083d0017,
+        type: 2}
+    - target: {fileID: 114287739562342188, guid: 735d0f72fc5b2224b99393f73df5f891,
+        type: 2}
+      propertyPath: baseDamage
+      value: 35
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 735d0f72fc5b2224b99393f73df5f891, type: 2}
   m_IsPrefabParent: 0
