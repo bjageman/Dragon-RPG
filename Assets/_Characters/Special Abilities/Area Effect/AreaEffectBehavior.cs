@@ -6,13 +6,13 @@ using System;
 
 namespace RPG.Characters {
 
-public class AreaEffectBehavior : MonoBehaviour, ISpecialAbility {
+public class AreaEffectBehavior : AbilityBehavior {
 
 	AreaEffectConfig config;
 
 	public AreaEffectConfig Config{ set { this.config = value;}}
 
-	public void Use(AbilityUseParams parameters)
+	public override void Use(AbilityUseParams parameters)
         {
             DealRadialDamage();
 			PlayParticleEffect();
@@ -36,7 +36,8 @@ public class AreaEffectBehavior : MonoBehaviour, ISpecialAbility {
 
 		private void PlayParticleEffect()
         {
-			var prefab = Instantiate(config.ParticlePrefab, transform.position, Quaternion.identity);
+            var particlePrefab = config.ParticlePrefab;
+			var prefab = Instantiate(particlePrefab, transform.position, particlePrefab.transform.rotation);
 			ParticleSystem particleSystem = prefab.GetComponent<ParticleSystem>();
 			particleSystem.Play();
 			Destroy(prefab, particleSystem.main.duration);

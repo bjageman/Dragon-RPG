@@ -27,7 +27,7 @@ namespace RPG.Characters{
 		[SerializeField] AudioClip audioClip;
 
 
-		protected ISpecialAbility behavior;
+		protected AbilityBehavior behavior;
 
 		public float EnergyCost{ get { return this.energyCost; } }
 		public float AttackRange{ get { return this.attackRange; } }
@@ -43,7 +43,4 @@ namespace RPG.Characters{
 		
 	}
 
-	public interface ISpecialAbility{
-		void Use(AbilityUseParams parameters);
-	}
 }

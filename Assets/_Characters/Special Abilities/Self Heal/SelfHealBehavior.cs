@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace RPG.Characters{
-public class SelfHealBehavior : MonoBehaviour, ISpecialAbility {
+public class SelfHealBehavior : AbilityBehavior {
 
 	SelfHealConfig config = null;
 	Player player = null;
@@ -15,7 +15,7 @@ public class SelfHealBehavior : MonoBehaviour, ISpecialAbility {
 
 	public SelfHealConfig Config { set { this.config = value;} } 
 
-	public void Use(AbilityUseParams parameters)
+	public override void Use(AbilityUseParams parameters)
         {
             player.Heal(config.HealAmount);
             PlayAudioClip();
@@ -36,7 +36,8 @@ public class SelfHealBehavior : MonoBehaviour, ISpecialAbility {
 			prefab.transform.parent = transform;
 			ParticleSystem particleSystem = prefab.GetComponent<ParticleSystem>();
 			particleSystem.Play();
-			Destroy(prefab, particleSystem.main.duration);
+            //TODO Particles killed too soon
+			Destroy(prefab, 10);
         }
 }
 }

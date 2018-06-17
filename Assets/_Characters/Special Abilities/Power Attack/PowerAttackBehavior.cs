@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace RPG.Characters{
-	public class PowerAttackBehavior : MonoBehaviour, ISpecialAbility {
+	public class PowerAttackBehavior : AbilityBehavior  {
 
 		PowerAttackConfig config;
         Player player;
@@ -14,7 +14,7 @@ namespace RPG.Characters{
 		    player = gameObject.GetComponent<Player>();
 	    }
 
-		public void Use(AbilityUseParams parameters)
+		public override void Use(AbilityUseParams parameters)
         {
             DealExtraDamage(parameters);
 			PlayParticleEffect();

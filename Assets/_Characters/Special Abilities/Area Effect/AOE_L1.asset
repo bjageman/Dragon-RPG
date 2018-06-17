@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Name: Area Effect L1
   m_EditorClassIdentifier: 
   energyCost: 10
-  attackRange: 10
-  particlePrefab: {fileID: 1569197901733852, guid: ab081d47a7615f44eb48b11d9af7d741,
+  attackRange: 10000
+  particlePrefab: {fileID: 1506274036189070, guid: 2e93a469b49a2574ca7e61607bc52450,
     type: 2}
+  audioClip: {fileID: 0}
   radius: 10
   damageToEachTarget: 10

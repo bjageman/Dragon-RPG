@@ -53,6 +53,7 @@ namespace RPG.Characters
 			float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
 			if (distanceToPlayer < attackRadius && !isAttacking){
 				isAttacking = true;
+				transform.LookAt(player.transform);
 				spawnProjectileCoroutine = StartCoroutine(FireProjectile()); //TODO slow this down
 			}
 			if (distanceToPlayer > attackRadius && spawnProjectileCoroutine != null){
