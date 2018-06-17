@@ -12,18 +12,25 @@ namespace RPG.Characters
 {
 	public class Player : MonoBehaviour, IDamageable {
 
+		[Header("Health")]
 		[SerializeField] int maxHealthPoints = 100;
 		[SerializeField] float currentHealthPoints = 0f;
+		[Header("Damage")]
 		[SerializeField] int baseDamage = 10;
 		[SerializeField] Weapon weaponInUse = null;
+		[Range (.1f, 1.0f)] [SerializeField] float criticalHitChance = 0.1f;
+		[SerializeField] float criticalHitMultiplier = 1.25f;
+		[SerializeField] ParticleSystem criticalHitParticleSystem = null;
+		[Header("Animation")]
 		[SerializeField] AnimatorOverrideController animatorOverrideController = null;
-		// Temporarily serialized for dubbing
-		[SerializeField] AbilityConfig[] abilities;
-
+		[Header("Sounds")]
 		[SerializeField] AudioClip[] damageSounds = new AudioClip[0];
 		[SerializeField] AudioClip[] deathSounds = new AudioClip[0];
+ 
+		// Temporarily serialized for dubbing
+		[Header("Special Abilities")]
+		[SerializeField] AbilityConfig[] abilities;
 		
-		// TODO SUPER BUGGY setting this to enemy now
 		Enemy enemy = null;
 		AudioSource audioSource;
 		Animator animator;
@@ -131,7 +138,7 @@ namespace RPG.Characters
 
 			if (energy.IsEnergyAvailable(energyCost) && IsTargetInRange(attackRange)){
 				energy.ConsumeEnergy(energyCost);
-				var abilityParams = new AbilityUseParams(enemy, baseDamage, enemy.transform);
+				var abilityParams = new AbilityUseParams(enemy, baseDamage  + weaponInUse.AdditionalDamage, enemy.transform);
 				abilities[abilityIndex].Use(abilityParams);
 			}
 		}
@@ -140,12 +147,22 @@ namespace RPG.Characters
         {
             if (Time.time - lastHitTime > weaponInUse.GetMinTimeBetweenHits())
             {
-				print("Attack");
                 animator.SetTrigger("Attack"); // TODO make const
-				gameObject.transform.LookAt(enemy.transform);
-                enemy.TakeDamage(baseDamage);
+                gameObject.transform.LookAt(enemy.transform);
+                enemy.TakeDamage(CalculateDamage());
                 lastHitTime = Time.time;
             }
+        }
+
+        private float CalculateDamage()
+        {
+			bool isCriticalHit = UnityEngine.Random.Range(0f, 1f) <= criticalHitChance;
+			float damage = baseDamage + weaponInUse.AdditionalDamage;
+            if (isCriticalHit){
+				criticalHitParticleSystem.Play();
+				damage = damage * criticalHitMultiplier;
+			}
+			return damage;
         }
 
         private bool IsTargetInRange(float maxAttackRange)

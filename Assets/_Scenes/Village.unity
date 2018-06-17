@@ -265,39 +265,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4681827400794752, guid: 2b9d7b98b14f2e5479d77086d01a334e,
     type: 2}
   m_PrefabInternal: {fileID: 1498475917}
---- !u!1 &339303446
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 339303447}
-  m_Layer: 10
-  m_Name: Particle Systems
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &339303447
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 339303446}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 344425423}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &344425423 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4947114628300156, guid: 735d0f72fc5b2224b99393f73df5f891,
-    type: 2}
-  m_PrefabInternal: {fileID: 1392052289}
 --- !u!1001 &414313921
 Prefab:
   m_ObjectHideFlags: 0
@@ -943,16 +910,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114287739562342188, guid: 735d0f72fc5b2224b99393f73df5f891,
-        type: 2}
-      propertyPath: abilities.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114287739562342188, guid: 735d0f72fc5b2224b99393f73df5f891,
-        type: 2}
-      propertyPath: damageSounds.Array.size
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4947114628300156, guid: 735d0f72fc5b2224b99393f73df5f891, type: 2}
       propertyPath: m_LocalPosition.x
       value: 27.704132
@@ -987,82 +944,24 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114002473792548434, guid: 735d0f72fc5b2224b99393f73df5f891,
         type: 2}
-      propertyPath: energyBar
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114002473792548434, guid: 735d0f72fc5b2224b99393f73df5f891,
-        type: 2}
       propertyPath: energyOrb
       value: 
       objectReference: {fileID: 1351722932}
-    - target: {fileID: 114287739562342188, guid: 735d0f72fc5b2224b99393f73df5f891,
+    - target: {fileID: 198509892265468646, guid: 735d0f72fc5b2224b99393f73df5f891,
         type: 2}
-      propertyPath: abilities.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: e5dc4ec67b60bd447bec4601083d0017,
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198509892265468646, guid: 735d0f72fc5b2224b99393f73df5f891,
         type: 2}
-    - target: {fileID: 114287739562342188, guid: 735d0f72fc5b2224b99393f73df5f891,
+      propertyPath: randomSeed
+      value: 763546490
+      objectReference: {fileID: 0}
+    - target: {fileID: 198509892265468646, guid: 735d0f72fc5b2224b99393f73df5f891,
         type: 2}
-      propertyPath: abilities.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: 9355650a81035a6478a64b57a0658cfe,
-        type: 2}
-    - target: {fileID: 114287739562342188, guid: 735d0f72fc5b2224b99393f73df5f891,
-        type: 2}
-      propertyPath: abilities.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: 43db881152e3f844f9e29761217e8fbc,
-        type: 2}
-    - target: {fileID: 114287739562342188, guid: 735d0f72fc5b2224b99393f73df5f891,
-        type: 2}
-      propertyPath: damageSounds.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
-    - target: {fileID: 114287739562342188, guid: 735d0f72fc5b2224b99393f73df5f891,
-        type: 2}
-      propertyPath: damageSounds.Array.data[1]
-      value: 
-      objectReference: {fileID: 8300000, guid: 6e8772b49f34d402a90016ed445d8a2f, type: 3}
-    - target: {fileID: 114287739562342188, guid: 735d0f72fc5b2224b99393f73df5f891,
-        type: 2}
-      propertyPath: damageSounds.Array.data[2]
-      value: 
-      objectReference: {fileID: 8300000, guid: 18e975f5bae2b8e4a99d2fa080b22e82, type: 3}
-    - target: {fileID: 114287739562342188, guid: 735d0f72fc5b2224b99393f73df5f891,
-        type: 2}
-      propertyPath: damageSounds.Array.data[3]
-      value: 
-      objectReference: {fileID: 8300000, guid: 8b9c5646349af7f44919304bb770fc34, type: 3}
-    - target: {fileID: 114287739562342188, guid: 735d0f72fc5b2224b99393f73df5f891,
-        type: 2}
-      propertyPath: damageSounds.Array.data[4]
-      value: 
-      objectReference: {fileID: 8300000, guid: 28f4108a75a88114488dcf030c881db7, type: 3}
-    - target: {fileID: 114287739562342188, guid: 735d0f72fc5b2224b99393f73df5f891,
-        type: 2}
-      propertyPath: damageSounds.Array.data[5]
-      value: 
-      objectReference: {fileID: 8300000, guid: df90f9c07a49df54db6b2a205fb392ec, type: 3}
-    - target: {fileID: 114287739562342188, guid: 735d0f72fc5b2224b99393f73df5f891,
-        type: 2}
-      propertyPath: damageSounds.Array.data[6]
-      value: 
-      objectReference: {fileID: 8300000, guid: 0034033b270770849ba81c405824f747, type: 3}
-    - target: {fileID: 114287739562342188, guid: 735d0f72fc5b2224b99393f73df5f891,
-        type: 2}
-      propertyPath: damageSounds.Array.data[7]
-      value: 
-      objectReference: {fileID: 8300000, guid: d2cd10bd4e831f1429135cf8d36f9917, type: 3}
-    - target: {fileID: 114287739562342188, guid: 735d0f72fc5b2224b99393f73df5f891,
-        type: 2}
-      propertyPath: damageSounds.Array.data[8]
-      value: 
-      objectReference: {fileID: 8300000, guid: a58f8a38ec7081448949d9921f4f85b2, type: 3}
-    - target: {fileID: 114287739562342188, guid: 735d0f72fc5b2224b99393f73df5f891,
-        type: 2}
-      propertyPath: damageSounds.Array.data[9]
-      value: 
-      objectReference: {fileID: 8300000, guid: 7f90a1e2e8c72f14d99fb4e61feb2c5c, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 735d0f72fc5b2224b99393f73df5f891, type: 2}
   m_IsPrefabParent: 0
