@@ -15,7 +15,8 @@ namespace RPG.Characters
 		//Attack Stats
 		[SerializeField] float damagePerShot = 9f;
 		[SerializeField] float attackRadius = 4f;
-		[SerializeField] float secondsBetweenShot = 0.5f;
+		[SerializeField] float firingPeriodInBetweenShots = 0.5f;
+		[SerializeField] float firingPeriodVariation = 0.1f;
 		[SerializeField] Projectile projectileToUse;
 		[SerializeField] GameObject projectileSocket;
 		[SerializeField] Vector3 aimOffset = new Vector3(0,1,0);
@@ -46,7 +47,7 @@ namespace RPG.Characters
 		void Update(){
 			if (player.healthAsPercentage <= Mathf.Epsilon){
 				StopAllCoroutines();
-				Destroy(this);
+				Destroy(this); //Stop enemy behavior
 			}
 
 			float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
@@ -68,7 +69,8 @@ namespace RPG.Characters
 		IEnumerator FireProjectile(){
 			while (true)
 			{
-				yield return new WaitForSeconds(secondsBetweenShot);
+				var randomisedDelay = firingPeriodInBetweenShots + Random.Range(-firingPeriodVariation, firingPeriodVariation);
+				yield return new WaitForSeconds(randomisedDelay);
 				Projectile projectileComponent = SpawnProjectile();
 				Vector3 unitVectorToPlayer = (player.transform.position + aimOffset - projectileSocket.transform.position).normalized;
 				projectileComponent.GetComponent<Rigidbody>().velocity = unitVectorToPlayer * projectileComponent.GetDefaultLaunchSpeed();
