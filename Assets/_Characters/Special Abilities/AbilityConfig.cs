@@ -24,7 +24,7 @@ namespace RPG.Characters{
 		[SerializeField] float energyCost = 10f;
 		[SerializeField] float attackRange = 10f;
 		[SerializeField] GameObject particlePrefab = null;
-		[SerializeField] AudioClip audioClip;
+		[SerializeField] AudioClip[] audioClips;
 
 
 		protected AbilityBehavior behavior;
@@ -32,13 +32,19 @@ namespace RPG.Characters{
 		public float EnergyCost{ get { return this.energyCost; } }
 		public float AttackRange{ get { return this.attackRange; } }
 		public GameObject ParticlePrefab{ get { return this.particlePrefab; } }
-		public AudioClip AudioClip { get { return this.audioClip; } }
-
+		public AudioClip[] AudioClips { get { return this.audioClips; } }
 
 		abstract public void AddComponent(GameObject gameObjectToAttachTo);
 
 		public void Use(AbilityUseParams parameters){
 			behavior.Use(parameters);
+		}
+
+		public AudioClip GetRandomSound(){
+			if (audioClips.Length > 0){
+				return audioClips[Random.Range(0, audioClips.Length - 1)];
+			}
+			return null;
 		}
 		
 	}

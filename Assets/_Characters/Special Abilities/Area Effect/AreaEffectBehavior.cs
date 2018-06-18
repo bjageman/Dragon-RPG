@@ -8,40 +8,30 @@ namespace RPG.Characters {
 
 public class AreaEffectBehavior : AbilityBehavior {
 
-	AreaEffectConfig config;
-
-	public AreaEffectConfig Config{ set { this.config = value;}}
-
 	public override void Use(AbilityUseParams parameters)
         {
             DealRadialDamage();
+            PlayAbilitySound();
 			PlayParticleEffect();
         }
 
-        private void DealRadialDamage()
+    private void DealRadialDamage()
+    {
+        RaycastHit[] hits;
+        // Static sphere cast for targets
+        hits = Physics.SphereCastAll(transform.position, (config as AreaEffectConfig).Radius, Vector3.up, (config as AreaEffectConfig).Radius);
+        foreach (RaycastHit hit in hits)
         {
-            RaycastHit[] hits;
-            // Static sphere cast for targets
-            hits = Physics.SphereCastAll(transform.position, config.Radius, Vector3.up, config.Radius);
-            foreach (RaycastHit hit in hits)
+            var damageable = hit.collider.GetComponent<IDamageable>();
+            bool hitPlayer = hit.collider.GetComponent<Player>();
+            if (damageable != null && !hitPlayer)
             {
-                var damageable = hit.collider.GetComponent<IDamageable>();
-                bool hitPlayer = hit.collider.GetComponent<Player>();
-                if (damageable != null && !hitPlayer)
-                {
-                    damageable.TakeDamage(config.DamageToEachTarget);
-                }
+                damageable.TakeDamage((config as AreaEffectConfig).DamageToEachTarget);
             }
         }
+    }
 
-		private void PlayParticleEffect()
-        {
-            var particlePrefab = config.ParticlePrefab;
-			var prefab = Instantiate(particlePrefab, transform.position, particlePrefab.transform.rotation);
-			ParticleSystem particleSystem = prefab.GetComponent<ParticleSystem>();
-			particleSystem.Play();
-			Destroy(prefab, particleSystem.main.duration);
-        }
+		
     }
 
 }

@@ -9,12 +9,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4cc438b4bcc8de74f995348b0e0d0a77, type: 3}
-  m_Name: Area Effect L1
+  m_Name: AOE_L1
   m_EditorClassIdentifier: 
   energyCost: 10
   attackRange: 10000
   particlePrefab: {fileID: 1506274036189070, guid: 2e93a469b49a2574ca7e61607bc52450,
     type: 2}
-  audioClip: {fileID: 0}
+  audioClips:
+  - {fileID: 8300000, guid: 7bef0064f8567430cac22499c6b93d4f, type: 3}
   radius: 10
   damageToEachTarget: 10
