@@ -11,6 +11,7 @@ namespace RPG.Characters
     {
         [SerializeField] float stoppingDistance = 1f;
         [SerializeField] float moveSpeedMultiplier = .7f;
+        [SerializeField] float animationSpeedMultiplier = 1.5f;
         [SerializeField] float movingTurnSpeed = 360;
 		[SerializeField] float stationaryTurnSpeed = 180;
 		[SerializeField] float moveThreshold = 1f;
@@ -28,7 +29,10 @@ namespace RPG.Characters
             CameraRaycaster cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
 
             animator = GetComponent<Animator>();
+
             rigidBody = GetComponent<Rigidbody>();
+            rigidBody.constraints = RigidbodyConstraints.FreezeRotation;
+
 
             agent = GetComponent<NavMeshAgent>();
             agent.updateRotation = false;
@@ -62,13 +66,9 @@ namespace RPG.Characters
 
         public void OnAnimatorMove()
         {
-            // we implement this function to override the default root motion.
-            // this allows us to modify the positional speed before it's applied.
             if (Time.deltaTime > 0)
             {
                 Vector3 velocity = (animator.deltaPosition * moveSpeedMultiplier) / Time.deltaTime;
-
-                // we preserve the existing y part of the current velocity.
                 velocity.y = rigidBody.velocity.y;
                 rigidBody.velocity = velocity;
             }
@@ -97,6 +97,7 @@ namespace RPG.Characters
 			// update the animator parameters
 			animator.SetFloat("Forward", forwardAmount, 0.1f, Time.deltaTime);
 			animator.SetFloat("Turn", turnAmount, 0.1f, Time.deltaTime);
+            animator.speed = animationSpeedMultiplier;
 		}
 
 		void ApplyExtraTurnRotation()
