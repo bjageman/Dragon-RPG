@@ -641,7 +641,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1862512598832916}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 27.704132, y: 0, z: 1.8687286}
+  m_LocalPosition: {x: 27.48, y: 0.16, z: 1.8687286}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4344967867787032}
@@ -855,8 +855,9 @@ MonoBehaviour:
   maxHealthPoints: 1000
   currentHealthPoints: 1000
   baseDamage: 35
-  weaponInUse: {fileID: 11400000, guid: c39bd5c5d03c727449eb1d53fb1cce3e, type: 2}
-  criticalHitChance: 1
+  currentWeaponConfig: {fileID: 11400000, guid: 0aa56c4a596383c43980926cfd5ee278,
+    type: 2}
+  criticalHitChance: 0.15
   criticalHitMultiplier: 1.25
   criticalHitParticleSystem: {fileID: 198509892265468646}
   animatorOverrideController: {fileID: 22100000, guid: 59b2bfb9de4754040a3e980b43ca2686,

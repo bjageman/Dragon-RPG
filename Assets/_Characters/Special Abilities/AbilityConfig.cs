@@ -26,15 +26,20 @@ namespace RPG.Characters{
 		[SerializeField] GameObject particlePrefab = null;
 		[SerializeField] AudioClip[] audioClips;
 
-
 		protected AbilityBehavior behavior;
+
+		public abstract AbilityBehavior GetBehaviorComponent(GameObject objectToAttachTo);
 
 		public float EnergyCost{ get { return this.energyCost; } }
 		public float AttackRange{ get { return this.attackRange; } }
 		public GameObject ParticlePrefab{ get { return this.particlePrefab; } }
 		public AudioClip[] AudioClips { get { return this.audioClips; } }
 
-		abstract public void AddComponent(GameObject gameObjectToAttachTo);
+		public void AttachAbilityTo(GameObject objectToAttachTo){
+			AbilityBehavior behaviorComponent = GetBehaviorComponent(objectToAttachTo);
+			behaviorComponent.Config = this;
+			behavior = behaviorComponent;
+		}
 
 		public void Use(AbilityUseParams parameters){
 			behavior.Use(parameters);

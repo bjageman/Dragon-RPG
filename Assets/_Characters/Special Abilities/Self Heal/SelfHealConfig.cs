@@ -11,10 +11,8 @@ namespace RPG.Characters {
 
 		public float HealAmount { get { return this.healAmount; } }
 
-		public override void AddComponent(GameObject gameObjectToAttachTo){
-			var behaviorComponent = gameObjectToAttachTo.AddComponent<SelfHealBehavior>();
-			behaviorComponent.Config = this;
-			behavior = behaviorComponent;
+		public override AbilityBehavior GetBehaviorComponent(GameObject objectToAttachTo){
+			return objectToAttachTo.AddComponent<SelfHealBehavior>();
 		}
 
 	}

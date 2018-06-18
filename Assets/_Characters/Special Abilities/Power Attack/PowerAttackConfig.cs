@@ -11,10 +11,8 @@ namespace RPG.Characters {
 
 		public float ExtraDamage{ get { return this.extraDamage; } }
 
-		public override void AddComponent(GameObject gameObjectToAttachTo){
-			var behaviorComponent = gameObjectToAttachTo.AddComponent<PowerAttackBehavior>();
-			behaviorComponent.Config = this;
-			behavior = behaviorComponent;
+		public override AbilityBehavior GetBehaviorComponent(GameObject objectToAttachTo){
+			return objectToAttachTo.AddComponent<PowerAttackBehavior>();
 		}
 	}
 }

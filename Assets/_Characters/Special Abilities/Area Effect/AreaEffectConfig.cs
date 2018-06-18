@@ -15,11 +15,9 @@ public class AreaEffectConfig : AbilityConfig {
 	public float Radius { get { return this.radius; }}
 	public float DamageToEachTarget { get { return this.damageToEachTarget; }}
 
-	public override void AddComponent(GameObject gameObjectToAttachTo){
-		var behaviorComponent = gameObjectToAttachTo.AddComponent<AreaEffectBehavior>();
-		behaviorComponent.Config = this;
-		behavior = behaviorComponent;
-	}
+	public override AbilityBehavior GetBehaviorComponent(GameObject objectToAttachTo){
+			return objectToAttachTo.AddComponent<AreaEffectBehavior>();
+		}
 }
 
 }

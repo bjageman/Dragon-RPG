@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using RPG.Core;
-using RPG.Weapons; //TODO Consider refactoring
 
 namespace RPG.Characters
 {
