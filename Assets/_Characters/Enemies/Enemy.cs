@@ -22,7 +22,7 @@ namespace RPG.Characters
 
 		
 		Player player = null;
-		AICharacterControl aiCharacterControl;
+		//AICharacterControl aiCharacterControl;
 		Coroutine spawnProjectileCoroutine;
 
 		bool isAttacking = false;
@@ -40,7 +40,7 @@ namespace RPG.Characters
 		void Start(){
 			currentHealthPoints = maxHealthPoints;
 			player = FindObjectOfType<Player>();
-			aiCharacterControl = GetComponent<AICharacterControl>();
+			//aiCharacterControl = GetComponent<AICharacterControl>();
 		}
 
 		void Update(){
@@ -60,9 +60,9 @@ namespace RPG.Characters
 				StopCoroutine(spawnProjectileCoroutine);
 			}
 			if (distanceToPlayer < chaseRadius){
-				aiCharacterControl.SetTarget(player.transform);
+				//aiCharacterControl.SetTarget(player.transform);
 			}else{
-				aiCharacterControl.SetTarget(transform);
+				//aiCharacterControl.SetTarget(transform);
 			}
 		}
 
